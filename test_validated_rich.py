@@ -16,16 +16,16 @@ def test_imports():
 
     try:
         from vim_readline import ValidatedRichVimReadline, validated_rich_vim_input, ValidatedRichTheme
-        print("✓ ValidatedRichVimReadline imports working")
+        print("ValidatedRichVimReadline imports working")
     except ImportError as e:
-        print(f"✗ Import error: {e}")
+        print(f"Import error: {e}")
         return False
 
     try:
         from vim_readline.validated_rich import ValidatedRichVimReadline
-        print("✓ Direct import from validated_rich module working")
+        print("Direct import from validated_rich module working")
     except ImportError as e:
-        print(f"✗ Direct import error: {e}")
+        print(f"Direct import error: {e}")
         return False
 
     return True
@@ -43,7 +43,7 @@ def test_theme_creation():
         assert default_theme.border_active == "blue"
         assert default_theme.border_valid == "green"
         assert default_theme.border_invalid == "red"
-        print("✓ Default theme creation working")
+        print("Default theme creation working")
 
         # Custom theme
         custom_theme = ValidatedRichTheme(
@@ -55,10 +55,10 @@ def test_theme_creation():
         assert custom_theme.border_active == "cyan"
         assert custom_theme.border_valid == "yellow"
         assert custom_theme.border_title_active == "bright_cyan"
-        print("✓ Custom theme creation working")
+        print("Custom theme creation working")
 
     except Exception as e:
-        print(f"✗ Theme creation error: {e}")
+        print(f"Theme creation error: {e}")
         return False
 
     return True
@@ -78,7 +78,7 @@ def test_class_instantiation():
         )
         assert readline.panel_title == "Test Input"
         assert readline._validation_state == "active"
-        print("✓ Basic instantiation working")
+        print("Basic instantiation working")
 
         # With validator and theme
         custom_theme = ValidatedRichTheme(border_active="magenta")
@@ -92,10 +92,10 @@ def test_class_instantiation():
         assert readline_with_validation.theme.border_active == "magenta"
         assert readline_with_validation.panel_box_style == "double"
         assert readline_with_validation.hidden_input == True
-        print("✓ Instantiation with validation and theme working")
+        print("Instantiation with validation and theme working")
 
     except Exception as e:
-        print(f"✗ Instantiation error: {e}")
+        print(f"Instantiation error: {e}")
         return False
 
     return True
@@ -121,10 +121,10 @@ def test_box_characters():
                 assert key in box_chars, f"Missing key {key} for style {style}"
                 assert len(box_chars[key]) > 0, f"Empty value for {key} in style {style}"
 
-        print("✓ Box character generation working for all styles")
+        print("Box character generation working for all styles")
 
     except Exception as e:
-        print(f"✗ Box character generation error: {e}")
+        print(f"Box character generation error: {e}")
         return False
 
     return True
@@ -147,7 +147,7 @@ def test_validation_state_changes():
         result = readline._perform_validation("test@example.com")
         assert result.is_valid == True
         assert readline._validation_state == "valid"
-        assert "✓" in readline._validation_message
+        assert "Valid" in readline._validation_message
 
         # Test validation with invalid email
         result = readline._perform_validation("invalid-email")
@@ -155,10 +155,10 @@ def test_validation_state_changes():
         assert readline._validation_state == "invalid"
         assert len(readline._validation_message) > 0
 
-        print("✓ Validation state changes working")
+        print("Validation state changes working")
 
     except Exception as e:
-        print(f"✗ Validation state change error: {e}")
+        print(f"Validation state change error: {e}")
         return False
 
     return True
@@ -186,15 +186,15 @@ if __name__ == "__main__":
             else:
                 failed += 1
         except Exception as e:
-            print(f"✗ Test {test_func.__name__} failed with exception: {e}")
+            print(f"Test {test_func.__name__} failed with exception: {e}")
             failed += 1
         print()
 
     print(f"Test Results: {passed} passed, {failed} failed")
 
     if failed == 0:
-        print("🎉 All tests passed! ValidatedRichVimReadline is ready to use.")
+        print("All tests passed! ValidatedRichVimReadline is ready to use.")
         sys.exit(0)
     else:
-        print("❌ Some tests failed!")
+        print("Some tests failed!")
         sys.exit(1)

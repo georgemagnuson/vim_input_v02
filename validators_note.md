@@ -20,7 +20,7 @@ All validator classes are contained in `vim_readline/validators.py`:
 
 ## Trade-offs Analysis
 
-### ✅ **Advantages of Single File Approach**
+### **Advantages of Single File Approach**
 
 1. **Simple Imports**
    ```python
@@ -48,7 +48,7 @@ All validator classes are contained in `vim_readline/validators.py`:
    - Often used together (composite validation)
    - Share common patterns and base functionality
 
-### ❌ **Disadvantages of Single File Approach**
+### **Disadvantages of Single File Approach**
 
 1. **File Growth**
    - Could become large with many validators
@@ -74,7 +74,7 @@ vim_readline/
 │   └── composite.py     # CompositeValidator
 ```
 
-### ✅ **Advantages of Individual Files**
+### **Advantages of Individual Files**
 
 1. **Lazy Loading**
    - Only import validators actually used
@@ -88,7 +88,7 @@ vim_readline/
    - Each validator fully isolated
    - Independent testing and development
 
-### ❌ **Disadvantages of Individual Files**
+### **Disadvantages of Individual Files**
 
 1. **Import Complexity**
    ```python

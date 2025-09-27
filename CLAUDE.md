@@ -19,12 +19,12 @@ Available in multiple variants:
 - Cursor shape changes by mode (beam/block/underline)
 - Optional line numbers and status indicators ("-- INSERT --")
 - Support for both initial_text (editable) and placeholder_text (hint)
-- **Input validation**: Email, date, integer, float, regex, length, custom validators
-- **Hidden input**: Password masking with configurable characters
-- **Rich styling**: State-based border coloring (blue=active, green=valid, red=invalid)
-- **Validation on exit**: Prevents real-time bounceback, validates on submit
-- **Customizable themes**: Configurable colors for all validation states
-- **Validation messages**: Right-aligned in bottom border
+- Input validation: Email, date, integer, float, regex, length, custom validators
+- Hidden input: Password masking with configurable characters
+- Rich styling: State-based border coloring (blue=active, green=valid, red=invalid)
+- Validation on exit: Prevents real-time bounceback, validates on submit
+- Customizable themes: Configurable colors for all validation states
+- Validation messages: Right-aligned in bottom border
 - No file I/O - pure in-memory text buffer editing
 
 ## Development Setup
@@ -225,10 +225,10 @@ custom_theme = ValidatedRichTheme(
 
 ### Box Styles
 Available box styles for `panel_box_style`:
-- `"rounded"` - Rounded corners (╭─╮╰─╯) [Default]
-- `"square"` - Square corners (┌─┐└─┘)
-- `"double"` - Double lines (╔═╗╚═╝)
-- `"heavy"` - Heavy lines (┏━┓┗━┛)
+- "rounded" - Rounded corners (╭─╮╰─╯) [Default]
+- "square" - Square corners (┌─┐└─┘)
+- "double" - Double lines (╔═╗╚═╝)
+- "heavy" - Heavy lines (┏━┓┗━┛)
 
 ### Rich Box Style Demo
 ```bash

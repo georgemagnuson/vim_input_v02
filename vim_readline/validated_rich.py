@@ -444,7 +444,7 @@ class ValidatedRichVimReadline(ValidatedVimReadline):
 
         if result.is_valid:
             self._validation_state = "valid"
-            self._validation_message = "✓ Valid"
+            self._validation_message = "Valid"
         else:
             self._validation_state = "invalid"
             self._validation_message = result.error_message

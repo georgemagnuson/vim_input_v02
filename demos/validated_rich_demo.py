@@ -39,9 +39,9 @@ def demo_email_validation():
     )
 
     if result is not None:
-        print(f"✓ Email entered: {result}")
+        print(f"Email entered: {result}")
     else:
-        print("✗ Cancelled")
+        print("Cancelled")
     print()
 
 
@@ -84,9 +84,9 @@ def demo_password_input():
     )
 
     if result is not None:
-        print("✓ Password entered successfully (hidden)")
+        print("Password entered successfully (hidden)")
     else:
-        print("✗ Cancelled")
+        print("Cancelled")
     print()
 
 
@@ -113,9 +113,9 @@ def demo_box_styles():
         )
 
         if result is not None:
-            print(f"✓ Entered: {result}")
+            print(f"Entered: {result}")
         else:
-            print("✗ Cancelled")
+            print("Cancelled")
 
 
 def demo_complex_validation():
@@ -141,9 +141,9 @@ def demo_complex_validation():
     )
 
     if result is not None:
-        print(f"✓ Valid product code: {result}")
+        print(f"Valid product code: {result}")
     else:
-        print("✗ Cancelled")
+        print("Cancelled")
     print()
 
 
@@ -164,10 +164,10 @@ def demo_multiline_validation():
     )
 
     if result is not None:
-        print(f"✓ Description entered ({len(result)} characters)")
+        print(f"Description entered ({len(result)} characters)")
         print(f"Content: {repr(result)}")
     else:
-        print("✗ Cancelled")
+        print("Cancelled")
     print()
 
 
@@ -198,9 +198,9 @@ def demo_age_validation():
     )
 
     if result is not None:
-        print(f"✓ Age entered: {result}")
+        print(f"Age entered: {result}")
     else:
-        print("✗ Cancelled")
+        print("Cancelled")
     print()
 
 
@@ -211,11 +211,11 @@ def main():
     print("Rich-styled vim input with validation and state-based border colors")
     print()
     print("Key features:")
-    print("• State-based border coloring (blue=active, green=valid, red=invalid)")
-    print("• Validation messages in bottom border (right-aligned)")
-    print("• Validation on exit (prevents real-time bounceback)")
-    print("• Customizable themes and box styles")
-    print("• Hidden input support for passwords")
+    print("- State-based border coloring (blue=active, green=valid, red=invalid)")
+    print("- Validation messages in bottom border (right-aligned)")
+    print("- Validation on exit (prevents real-time bounceback)")
+    print("- Customizable themes and box styles")
+    print("- Hidden input support for passwords")
     print()
     print("Use vim navigation (hjkl, insert mode with 'i', etc.)")
     print("Press Ctrl-C to cancel any input, or Enter to submit")
@@ -242,10 +242,10 @@ def main():
 
     print("ValidatedRichVimReadline demos completed!")
     print("\nKey observations:")
-    print("• Border color changes based on validation state")
-    print("• Validation messages appear in bottom border")
-    print("• No real-time validation bounce-back")
-    print("• Rich visual styling with customizable themes")
+    print("- Border color changes based on validation state")
+    print("- Validation messages appear in bottom border")
+    print("- No real-time validation bounce-back")
+    print("- Rich visual styling with customizable themes")
 
 
 if __name__ == "__main__":
