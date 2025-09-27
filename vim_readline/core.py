@@ -16,6 +16,8 @@ from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.layout.processors import HighlightMatchingBracketProcessor
 from prompt_toolkit.styles import Style
 from prompt_toolkit.cursor_shapes import CursorShape, ModalCursorShapeConfig
+from typing import Optional
+from .themes import VimReadlineTheme, get_default_theme
 
 
 class VimReadline:
@@ -40,7 +42,8 @@ class VimReadline:
                  wrap_lines=True,
                  submit_key='c-m',        # Return
                  newline_key='c-j',       # Ctrl-J (or Shift-Return on many terminals)
-                 cancel_keys=None):
+                 cancel_keys=None,
+                 theme: Optional[VimReadlineTheme] = None):
 
         if cancel_keys is None:
             cancel_keys = ['c-c', 'c-d']
@@ -50,6 +53,7 @@ class VimReadline:
         self.prompt = prompt
         self.show_line_numbers = show_line_numbers
         self.show_status = show_status
+        self.theme = theme or get_default_theme()
         self.wrap_lines = wrap_lines
         self.submit_key = submit_key
         self.newline_key = newline_key
@@ -266,14 +270,8 @@ class VimReadline:
         return kb
 
     def _create_style(self):
-        """Create styling for the interface."""
-        return Style.from_dict({
-            'prompt': 'bold',
-            'line-number': '#666666',
-            'line-number-separator': '#666666',
-            'status': 'reverse',
-            'placeholder': '#888888 italic',
-        })
+        """Create styling for the interface using centralized theme."""
+        return self.theme.get_prompt_toolkit_style()
 
     def run(self):
         """

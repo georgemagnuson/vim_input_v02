@@ -8,6 +8,12 @@ vim-style text input.
 
 from .core import VimReadline, vim_input
 
+# Centralized theme system
+from .themes import (
+    VimReadlineTheme, DarkTheme, LightTheme, MinimalTheme,
+    get_default_theme, create_custom_theme
+)
+
 # Validated vim readline with input validation
 from .validated import ValidatedVimReadline, validated_vim_input
 from .validated_rich import ValidatedRichVimReadline, validated_rich_vim_input, ValidatedRichTheme
@@ -49,6 +55,12 @@ __email__ = "noreply@anthropic.com"
 __all__ = [
     "VimReadline",
     "vim_input",
+    "VimReadlineTheme",
+    "DarkTheme",
+    "LightTheme",
+    "MinimalTheme",
+    "get_default_theme",
+    "create_custom_theme",
     "ValidatedVimReadline",
     "validated_vim_input",
     "ValidatedRichVimReadline",

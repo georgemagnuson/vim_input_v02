@@ -22,6 +22,7 @@ import io
 
 from .validated import ValidatedVimReadline
 from .validators import Validator, ValidationResult
+from .themes import VimReadlineTheme
 
 
 class ValidatedRichTheme:
@@ -79,7 +80,9 @@ class ValidatedRichVimReadline(ValidatedVimReadline):
                  panel_box_style="rounded",  # "rounded", "square", "double", "heavy"
                  show_rules=False,  # Disabled by default for cleaner look
                  # Theme configuration
-                 theme: Optional[ValidatedRichTheme] = None):
+                 theme: Optional[ValidatedRichTheme] = None,
+                 # Centralized theme system
+                 base_theme: Optional[VimReadlineTheme] = None):
 
         # Rich options
         self.panel_title = panel_title
@@ -119,7 +122,8 @@ class ValidatedRichVimReadline(ValidatedVimReadline):
             hidden_input=hidden_input,
             mask_character=mask_character,
             show_validation_error=False,  # We handle validation display ourselves
-            validate_on_change=False  # Disable real-time validation
+            validate_on_change=False,  # Disable real-time validation
+            theme=base_theme
         )
 
     def _get_current_border_color(self):
@@ -484,7 +488,7 @@ class ValidatedRichVimReadline(ValidatedVimReadline):
             'line-number': '#666666',
             'line-number-separator': '#666666',
             'status': 'reverse',
-            'placeholder': '#888888 italic',
+            'placeholder': '#555555 italic',
         }
 
         # State-based border styles

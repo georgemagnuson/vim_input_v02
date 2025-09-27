@@ -16,6 +16,7 @@ from typing import Optional, Union
 
 from .validators import Validator, ValidationResult
 from .core import VimReadline
+from .themes import VimReadlineTheme
 
 
 class ValidatedVimReadline(VimReadline):
@@ -43,7 +44,8 @@ class ValidatedVimReadline(VimReadline):
                  hidden_input=False,
                  mask_character='*',
                  show_validation_error=True,
-                 validate_on_change=True):
+                 validate_on_change=True,
+                 theme: Optional[VimReadlineTheme] = None):
 
         self.validator = validator
         self.hidden_input = hidden_input
@@ -65,7 +67,8 @@ class ValidatedVimReadline(VimReadline):
             wrap_lines=wrap_lines,
             submit_key=submit_key,
             newline_key=newline_key,
-            cancel_keys=cancel_keys
+            cancel_keys=cancel_keys,
+            theme=theme
         )
 
         # Add validation on text change if enabled
@@ -250,18 +253,6 @@ class ValidatedVimReadline(VimReadline):
 
         return kb
 
-    def _create_style(self):
-        """Create styling with validation error styling."""
-        style_dict = {
-            'prompt': 'bold',
-            'line-number': '#666666',
-            'line-number-separator': '#666666',
-            'status': 'reverse',
-            'placeholder': '#999999',
-            'validation-error': '#ff0000 bold',  # Red error messages
-        }
-        return Style.from_dict(style_dict)
-
     def validate_current_input(self) -> ValidationResult:
         """Manually validate the current input."""
         if not self.validator:
@@ -283,7 +274,8 @@ def validated_vim_input(prompt="",
                        wrap_lines=True,
                        validator: Optional[Validator] = None,
                        hidden_input=False,
-                       mask_character='*'):
+                       mask_character='*',
+                       theme: Optional[VimReadlineTheme] = None):
     """
     Simple function interface for validated vim_readline.
 
@@ -297,6 +289,7 @@ def validated_vim_input(prompt="",
         validator: Validator instance to use for input validation
         hidden_input: Whether to mask input (for passwords)
         mask_character: Character to use for masking when hidden_input=True
+        theme: VimReadlineTheme instance for custom styling
 
     Returns:
         str: The edited and validated text, or None if cancelled
@@ -310,6 +303,7 @@ def validated_vim_input(prompt="",
         wrap_lines=wrap_lines,
         validator=validator,
         hidden_input=hidden_input,
-        mask_character=mask_character
+        mask_character=mask_character,
+        theme=theme
     )
     return readline.run()
