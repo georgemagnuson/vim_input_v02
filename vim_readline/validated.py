@@ -84,6 +84,14 @@ class ValidatedVimReadline(VimReadline):
                 self._current_validation = self.validator.validate(text)
                 self._validation_message = self._current_validation.error_message
 
+    def _create_placeholder_aware_buffer_control(self, input_processors):
+        """Create a simple buffer control - we'll handle styling differently."""
+        return BufferControl(
+            buffer=self.buffer,
+            include_default_input_processors=True,
+            input_processors=input_processors
+        )
+
     def _create_layout(self):
         """Create the layout with validation error display."""
         # Main buffer control with optional password masking
@@ -92,18 +100,21 @@ class ValidatedVimReadline(VimReadline):
         if self.hidden_input:
             input_processors.append(PasswordProcessor(char=self.mask_character))
 
-        buffer_control = BufferControl(
-            buffer=self.buffer,
-            include_default_input_processors=True,
-            input_processors=input_processors
-        )
+        # Create custom buffer control that handles placeholder styling
+        buffer_control = self._create_placeholder_aware_buffer_control(input_processors)
 
-        # Main text window
+        # Main text window with conditional styling
+        def get_text_style():
+            if self._is_placeholder_active:
+                return 'class:placeholder'
+            return ''
+
         text_window = Window(
             content=buffer_control,
             wrap_lines=self.wrap_lines,
             dont_extend_width=False,
-            dont_extend_height=True
+            dont_extend_height=True,
+            style=get_text_style
         )
 
         # Optional prompt
@@ -246,7 +257,7 @@ class ValidatedVimReadline(VimReadline):
             'line-number': '#666666',
             'line-number-separator': '#666666',
             'status': 'reverse',
-            'placeholder': '#888888 italic',
+            'placeholder': '#999999',
             'validation-error': '#ff0000 bold',  # Red error messages
         }
         return Style.from_dict(style_dict)
