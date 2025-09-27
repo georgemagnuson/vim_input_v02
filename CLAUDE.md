@@ -7,9 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **VimReadline** - A vim-mode readline implementation for single-buffer text editing without file I/O, based on `prompt-toolkit`.
 
 Available in multiple variants:
-- **Core VimReadline**: Clean, minimal vim text editor (`vim_readline/core.py`)
-- **ValidatedVimReadline**: Core functionality plus input validation and hidden input (`vim_readline/validated.py`)
-- **Rich Box Style**: Same vim functionality with Rich-inspired box styling (`demos/vim_rich_box_style_editor.py`)
+- **Core VimReadline**: Clean, minimal vim text editor (`vim_readline/core.py`) [Legacy - will be replaced]
+- **ValidatedVimReadline**: Core functionality plus input validation and hidden input (`vim_readline/validated.py`) [Primary interface]
+- **ValidatedRichVimReadline**: Rich box styling + validation with state-based border coloring (`vim_readline/validated_rich.py`) [Primary Rich interface]
+- **RichVimReadline**: Rich-inspired box styling (`vim_readline/rich_enhanced.py`) [Legacy - will be replaced]
 
 ## Key Features
 
@@ -20,7 +21,10 @@ Available in multiple variants:
 - Support for both initial_text (editable) and placeholder_text (hint)
 - **Input validation**: Email, date, integer, float, regex, length, custom validators
 - **Hidden input**: Password masking with configurable characters
-- **Real-time validation feedback**: Visual error messages and status indicators
+- **Rich styling**: State-based border coloring (blue=active, green=valid, red=invalid)
+- **Validation on exit**: Prevents real-time bounceback, validates on submit
+- **Customizable themes**: Configurable colors for all validation states
+- **Validation messages**: Right-aligned in bottom border
 - No file I/O - pure in-memory text buffer editing
 
 ## Development Setup
@@ -58,17 +62,20 @@ pip install -r requirements.txt
 ## Key Files
 
 ### Core Library
-- `vim_readline/core.py`: Main VimReadline implementation
-- `vim_readline/validated.py`: ValidatedVimReadline with input validation
+- `vim_readline/core.py`: Main VimReadline implementation [Legacy]
+- `vim_readline/validated.py`: ValidatedVimReadline with input validation [Primary]
+- `vim_readline/validated_rich.py`: ValidatedRichVimReadline with Rich styling [Primary Rich]
 - `vim_readline/validators.py`: Validation system and built-in validators
+- `vim_readline/rich_enhanced.py`: RichVimReadline [Legacy]
 - `vim_readline/__init__.py`: Package interface
 
 ### Demos
-- `demos/vim_rich_box_style_editor.py`: Rich box style vim editor (main demo)
+- `demos/validated_rich_demo.py`: ValidatedRichVimReadline state-based coloring demos
 - `demos/validation_demos.py`: Comprehensive validation feature demos
 - `demos/quick_validation_example.py`: Simple validation usage example
-- `demos/demo_complete_rich_solution.py`: Shows all solution approaches
-- `demos/interactive_rich_demo.py`: Basic Rich interactive editor
+- `demos/vim_rich_box_style_editor.py`: Rich box style vim editor [Legacy demo]
+- `demos/demo_complete_rich_solution.py`: Shows all solution approaches [Legacy]
+- `demos/interactive_rich_demo.py`: Basic Rich interactive editor [Legacy]
 
 ### Project Files
 - `requirements.txt`: prompt-toolkit>=3.0.0, rich
@@ -93,7 +100,46 @@ readline = VimReadline(
 result = readline.run()  # Returns edited text or None if cancelled
 ```
 
-### ValidatedVimReadline
+### ValidatedRichVimReadline (Recommended)
+```python
+from vim_readline import validated_rich_vim_input, ValidatedRichTheme, email, integer
+
+# Email validation with Rich styling and state-based border colors
+email_result = validated_rich_vim_input(
+    prompt="Email: ",
+    placeholder_text="Enter your email...",
+    validator=email(allow_empty=False),
+    panel_title="Email Input",
+    panel_box_style="rounded"  # Border changes: blue→green/red based on validation
+)
+
+# Password input with custom theme
+purple_theme = ValidatedRichTheme(
+    border_active="magenta",
+    border_valid="bright_green",
+    border_invalid="bright_red"
+)
+
+password_result = validated_rich_vim_input(
+    prompt="Password: ",
+    validator=custom(my_password_validator),
+    hidden_input=True,
+    mask_character='●',
+    panel_title="Password Entry",
+    panel_box_style="double",
+    theme=purple_theme
+)
+
+# Age validation with custom colors
+age_result = validated_rich_vim_input(
+    prompt="Age: ",
+    validator=integer(min_value=1, max_value=150, allow_empty=False),
+    panel_title="Age Entry",
+    panel_box_style="heavy"
+)
+```
+
+### ValidatedVimReadline (Basic Validation)
 ```python
 from vim_readline import validated_vim_input, email, integer, regex
 
@@ -144,15 +190,45 @@ username = validated_vim_input(
 
 ### Demo Usage
 ```bash
+# Run ValidatedRichVimReadline demos (recommended)
+python demos/validated_rich_demo.py
+
 # Run comprehensive validation demos
 python demos/validation_demos.py
 
 # Run quick validation example
 python demos/quick_validation_example.py
 
-# Test validation system
+# Test validation systems
 python test_validation.py
+python test_validated_rich.py
 ```
+
+### ValidatedRichTheme Configuration
+```python
+# Default theme
+default_theme = ValidatedRichTheme()
+# border_active="blue", border_valid="green", border_invalid="red"
+
+# Custom theme
+custom_theme = ValidatedRichTheme(
+    border_active="cyan",           # Active input border color
+    border_valid="yellow",          # Valid input border color
+    border_invalid="red",           # Invalid input border color
+    border_title_active="bright_cyan",      # Active title color
+    border_title_valid="bright_yellow",     # Valid title color
+    border_title_invalid="bright_red",      # Invalid title color
+    validation_message_valid="green",       # Valid message color
+    validation_message_invalid="red"        # Invalid message color
+)
+```
+
+### Box Styles
+Available box styles for `panel_box_style`:
+- `"rounded"` - Rounded corners (╭─╮╰─╯) [Default]
+- `"square"` - Square corners (┌─┐└─┘)
+- `"double"` - Double lines (╔═╗╚═╝)
+- `"heavy"` - Heavy lines (┏━┓┗━┛)
 
 ### Rich Box Style Demo
 ```bash

@@ -10,6 +10,7 @@ from .core import VimReadline, vim_input
 
 # Validated vim readline with input validation
 from .validated import ValidatedVimReadline, validated_vim_input
+from .validated_rich import ValidatedRichVimReadline, validated_rich_vim_input, ValidatedRichTheme
 from .validators import (
     Validator, ValidationResult,
     EmailValidator, DateValidator, IntegerValidator, FloatValidator,
@@ -50,6 +51,9 @@ __all__ = [
     "vim_input",
     "ValidatedVimReadline",
     "validated_vim_input",
+    "ValidatedRichVimReadline",
+    "validated_rich_vim_input",
+    "ValidatedRichTheme",
     "Validator",
     "ValidationResult",
     "EmailValidator",
