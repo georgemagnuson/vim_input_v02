@@ -43,3 +43,6 @@ Thumbs.db
 
 # Memory Bank (local context)
 memory-bank/
+
+# pyvim reference (separate git repo)
+pyvim/

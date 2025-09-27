@@ -8,6 +8,15 @@ vim-style text input.
 
 from .core import VimReadline, vim_input
 
+# Validated vim readline with input validation
+from .validated import ValidatedVimReadline, validated_vim_input
+from .validators import (
+    Validator, ValidationResult,
+    EmailValidator, DateValidator, IntegerValidator, FloatValidator,
+    RegexValidator, LengthValidator, FunctionValidator, CompositeValidator,
+    email, date, integer, float_num, regex, length, custom, combine
+)
+
 # Box-constrained version
 from .constrained import BoxConstrainedVimReadline, box_constrained_vim_input
 
@@ -39,6 +48,26 @@ __email__ = "noreply@anthropic.com"
 __all__ = [
     "VimReadline",
     "vim_input",
+    "ValidatedVimReadline",
+    "validated_vim_input",
+    "Validator",
+    "ValidationResult",
+    "EmailValidator",
+    "DateValidator",
+    "IntegerValidator",
+    "FloatValidator",
+    "RegexValidator",
+    "LengthValidator",
+    "FunctionValidator",
+    "CompositeValidator",
+    "email",
+    "date",
+    "integer",
+    "float_num",
+    "regex",
+    "length",
+    "custom",
+    "combine",
     "BoxConstrainedVimReadline",
     "box_constrained_vim_input",
     "FullBoxVimReadline",

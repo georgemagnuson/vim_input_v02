@@ -5,7 +5,10 @@
       "Bash(find:*)",
       "Bash(python:*)",
       "Bash(pip install:*)",
-      "Bash(vim-readline:*)"
+      "Bash(vim-readline:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
