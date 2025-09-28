@@ -44,20 +44,20 @@ class VimReadlineTheme:
             'validation-valid': '#00ff00',       # Green for valid state
             'validation-warning': '#ffaa00',     # Orange for warnings
 
-            # Rich component borders (various styles)
+            # Rich component borders (various styles) - bright colors for visibility
             'border-default': '#666666',
-            'border-active': 'blue',
-            'border-valid': 'green',
-            'border-invalid': 'red',
+            'border-active': '#4a9eff',      # Bright blue
+            'border-valid': '#00ff88',       # Bright green
+            'border-invalid': '#ff4444',     # Bright red
             'border-light': '#888888',
             'border-dark': '#444444',
 
-            # Rich component titles and messages
-            'border-title-active': 'blue',
-            'border-title-valid': 'green',
-            'border-title-invalid': 'red',
-            'validation-message-valid': 'green',
-            'validation-message-invalid': 'red',
+            # Rich component titles and messages - bright colors
+            'border-title-active': '#4a9eff bold',
+            'border-title-valid': '#00ff88 bold',
+            'border-title-invalid': '#ff4444 bold',
+            'validation-message-valid': '#00ff88',
+            'validation-message-invalid': '#ff4444',
 
             # Rich enhanced styling
             'rich-border': '#666666',

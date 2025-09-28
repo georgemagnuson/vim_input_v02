@@ -16,7 +16,7 @@ from .themes import (
 
 # Validated vim readline with input validation
 from .validated import ValidatedVimReadline, validated_vim_input
-from .validated_rich import ValidatedRichVimReadline, validated_rich_vim_input, ValidatedRichTheme
+from .validated_rich import ValidatedRichVimReadline, validated_rich_vim_input
 from .validators import (
     Validator, ValidationResult,
     EmailValidator, DateValidator, IntegerValidator, FloatValidator,
@@ -65,7 +65,6 @@ __all__ = [
     "validated_vim_input",
     "ValidatedRichVimReadline",
     "validated_rich_vim_input",
-    "ValidatedRichTheme",
     "Validator",
     "ValidationResult",
     "EmailValidator",

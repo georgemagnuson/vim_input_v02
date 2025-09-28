@@ -18,9 +18,9 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from vim_readline.validated_rich import (
-    ValidatedRichVimReadline, validated_rich_vim_input, ValidatedRichTheme
+    ValidatedRichVimReadline, validated_rich_vim_input
 )
-from vim_readline import email, integer, regex, length, custom
+from vim_readline import email, integer, regex, length, custom, VimReadlineTheme
 
 
 def demo_email_validation():
@@ -51,14 +51,16 @@ def demo_password_input():
     print("Hidden input with custom purple theme")
     print("Password requirements: 8+ chars, uppercase, lowercase, digit")
 
-    # Custom purple theme
-    purple_theme = ValidatedRichTheme(
-        border_active="magenta",
-        border_valid="bright_green",
-        border_invalid="bright_red",
-        border_title_active="bright_magenta",
-        border_title_valid="bright_green",
-        border_title_invalid="bright_red"
+    # Custom purple theme using centralized theme system
+    purple_theme = VimReadlineTheme(
+        **{
+            'border-active': 'magenta',
+            'border-valid': '#00ff00',  # Bright green using hex
+            'border-invalid': '#ff0000',  # Bright red using hex
+            'border-title-active': 'magenta bold',
+            'border-title-valid': '#00ff00 bold',
+            'border-title-invalid': '#ff0000 bold'
+        }
     )
 
     def validate_password(password):
@@ -176,16 +178,18 @@ def demo_age_validation():
     print("=== Age Validation Demo (Custom Colors) ===")
     print("Enter age between 1 and 150")
 
-    # Custom cyan/yellow theme
-    custom_theme = ValidatedRichTheme(
-        border_active="cyan",
-        border_valid="yellow",
-        border_invalid="red",
-        border_title_active="bright_cyan",
-        border_title_valid="bright_yellow",
-        border_title_invalid="bright_red",
-        validation_message_valid="bright_yellow",
-        validation_message_invalid="bright_red"
+    # Custom cyan/yellow theme using centralized theme system
+    custom_theme = VimReadlineTheme(
+        **{
+            'border-active': 'cyan',
+            'border-valid': 'yellow',
+            'border-invalid': 'red',
+            'border-title-active': 'cyan bold',
+            'border-title-valid': 'yellow bold',
+            'border-title-invalid': 'red bold',
+            'validation-message-valid': 'yellow bold',
+            'validation-message-invalid': 'red bold'
+        }
     )
 
     result = validated_rich_vim_input(
