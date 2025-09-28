@@ -11,6 +11,7 @@ from .core import VimReadline, vim_input
 # Centralized theme system
 from .themes import (
     VimReadlineTheme, DarkTheme, LightTheme, MinimalTheme,
+    HighContrastTheme, NeonTheme,
     get_default_theme, create_custom_theme
 )
 
@@ -59,6 +60,8 @@ __all__ = [
     "DarkTheme",
     "LightTheme",
     "MinimalTheme",
+    "HighContrastTheme",
+    "NeonTheme",
     "get_default_theme",
     "create_custom_theme",
     "ValidatedVimReadline",

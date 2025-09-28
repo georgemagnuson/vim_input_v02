@@ -21,7 +21,7 @@ import os
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from vim_readline import validated_rich_vim_input, length, VimReadlineTheme
+from vim_readline import validated_rich_vim_input, length, VimReadlineTheme, DarkTheme, LightTheme
 
 
 def main():
@@ -29,25 +29,43 @@ def main():
     print("Simple Hello App (Rich Style)")
     print("==============================")
     print("Enter your name in the rich-styled vim editor below")
-    print("• Border colors: Bright blue=active, Bright green=valid, Bright red=invalid")
+    print("• Border colors: Blue=active, Green=valid, Red=invalid")
     print("• Vim mode shown in bottom-left corner (I=insert, V=visual, nothing=normal)")
     print("• Use vim navigation (i for insert, hjkl for movement)")
     print("• Press Enter to submit, Ctrl-C to exit")
     print()
+    print("Theme Options:")
+    print("1. Dark Theme (default) - Bright colors for dark terminals")
+    print("2. Light Theme - Darker colors for light terminals")
+    print("3. Custom Theme - Manual color specification")
+    print()
 
-    # Create a custom theme for the hello app with bright, visible colors
-    hello_theme = VimReadlineTheme(**{
-        'placeholder': 'cyan italic',
-        'prompt': 'yellow bold',
-        'border-active': '#4a9eff',      # Bright blue
-        'border-valid': '#00ff88',       # Bright green
-        'border-invalid': '#ff4444',     # Bright red
-        'border-title-active': '#4a9eff bold',
-        'border-title-valid': '#00ff88 bold',
-        'border-title-invalid': '#ff4444 bold',
-        'validation-message-valid': '#00ff88',
-        'validation-message-invalid': '#ff4444'
-    })
+    # Let user choose theme
+    theme_choice = input("Choose theme (1, 2, 3) or press Enter for default: ").strip()
+
+    if theme_choice == "2":
+        hello_theme = LightTheme()
+        print("Using Light Theme")
+    elif theme_choice == "3":
+        # Create a custom theme for demonstration
+        hello_theme = VimReadlineTheme(**{
+            'placeholder': 'cyan italic',
+            'prompt': 'yellow bold',
+            'border-active': '#4a9eff',      # Bright blue
+            'border-valid': '#00ff88',       # Bright green
+            'border-invalid': '#ff4444',     # Bright red
+            'border-title-active': '#4a9eff bold',
+            'border-title-valid': '#00ff88 bold',
+            'border-title-invalid': '#ff4444 bold',
+            'validation-message-valid': '#00ff88',
+            'validation-message-invalid': '#ff4444'
+        })
+        print("Using Custom Theme")
+    else:
+        hello_theme = DarkTheme()
+        print("Using Dark Theme (default)")
+
+    print()
 
     try:
         # Ask for user's name with rich styling and validation
