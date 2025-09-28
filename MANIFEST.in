@@ -2,4 +2,6 @@ include README.md
 include LICENSE
 include requirements.txt
 include CLAUDE.md
+include hello_app_rich.py
 recursive-include vim_readline *.py
+recursive-include demos *.py

@@ -28,7 +28,7 @@ setup(
     version=get_version(),
     author="Generated with Claude Code",
     author_email="noreply@anthropic.com",
-    description="A vim-mode readline implementation for single-buffer text editing",
+    description="A vim-mode readline implementation with Rich styling, validation, and centralized theming",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/anthropics/vim_input_v02",
@@ -54,23 +54,27 @@ setup(
     python_requires=">=3.7",
     install_requires=[
         "prompt-toolkit>=3.0.0",
+        "rich>=12.0.0",  # Rich is now required for the enhanced theming and Rich components
     ],
     extras_require={
-        "rich": [
-            "rich>=12.0.0",
-        ],
         "dev": [
             "pytest",
             "pytest-cov",
-            "rich>=12.0.0",
+            "black",
+            "flake8",
+        ],
+        "demos": [
+            # All dependencies for running demos are in base install now
         ],
     },
     entry_points={
         "console_scripts": [
-            "vim-readline-demo=vim_readline.examples:main",
+            "vim-readline-demo=demos.validated_rich_demo:main",
+            "vim-readline-themes=demos.theme_showcase_rich:main",
+            "vim-readline-hello=hello_app_rich:main",
         ],
     },
-    keywords="vim, readline, prompt-toolkit, text-editor, terminal, cli",
+    keywords="vim, readline, prompt-toolkit, text-editor, terminal, cli, rich, validation, theming",
     project_urls={
         "Bug Reports": "https://github.com/anthropics/vim_input_v02/issues",
         "Source": "https://github.com/anthropics/vim_input_v02",
