@@ -12,9 +12,19 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(echo $TERM)",
-      "Read(//Users/georgemagnuson/.claude/**)"
+      "Read(//Users/georgemagnuson/.claude/**)",
+      "WebSearch",
+      "WebFetch(domain:rich.readthedocs.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:textual.textualize.io)",
+      "mcp__memory-bank-v05__work_on_project",
+      "mcp__memory-bank-v05__save_session_context"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "memory-bank"
+  ]
 }

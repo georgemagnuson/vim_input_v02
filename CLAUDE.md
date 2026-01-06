@@ -251,3 +251,5 @@ The Rich box style variant uses a "pseudo-Rich" approach:
 - Provides Rich's visual quality without requiring Rich for real-time interaction
 - No extra dependencies beyond prompt-toolkit and rich (for character extraction)
 - Do not use emoji/icons in code
+- allow memory-bank commands
+- allow edit commands
