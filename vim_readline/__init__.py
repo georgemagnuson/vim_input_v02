@@ -124,3 +124,27 @@ if _rich_interactive_available:
         "rich_vim_input",
         "RichVimWorkspace"
     ])
+
+# Rich Prompt API integration (extends Rich's Prompt.ask)
+try:
+    from .rich_prompt import VimPrompt, IntVimPrompt, FloatVimPrompt, ask_vim, ask_vim_int, ask_vim_float
+    _vim_prompt_available = True
+except ImportError:
+    VimPrompt = None
+    IntVimPrompt = None
+    FloatVimPrompt = None
+    ask_vim = None
+    ask_vim_int = None
+    ask_vim_float = None
+    _vim_prompt_available = False
+
+# Add VimPrompt exports if available
+if _vim_prompt_available:
+    __all__.extend([
+        "VimPrompt",
+        "IntVimPrompt",
+        "FloatVimPrompt",
+        "ask_vim",
+        "ask_vim_int",
+        "ask_vim_float"
+    ])

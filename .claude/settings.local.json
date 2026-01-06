@@ -19,7 +19,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:textual.textualize.io)",
       "mcp__memory-bank-v05__work_on_project",
-      "mcp__memory-bank-v05__save_session_context"
+      "mcp__memory-bank-v05__save_session_context",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

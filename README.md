@@ -6,6 +6,7 @@ A vim-mode readline implementation for single-buffer text editing, built on `pro
 - **VimReadline**: Clean, minimal vim text editor
 - **ValidatedVimReadline**: Core + input validation and hidden input
 - **ValidatedRichVimReadline**: Rich styling + validation + state-based border coloring
+- **VimPrompt**: Extends Rich's `Prompt.ask()` API with vim modal editing
 
 ## Features
 
@@ -37,6 +38,12 @@ A vim-mode readline implementation for single-buffer text editing, built on `pro
 - **Centralized theming**: consistent color schemes across all variants
 - **Fully customizable**: create your own themes with `create_custom_theme()`
 - **Theme documentation**: see `THEMING.md` for details
+
+### Rich Prompt API Integration
+- **Extends Rich's Prompt**: `VimPrompt.ask_vim()` works like `Prompt.ask()` but with vim
+- **Familiar API**: Same interface as Rich's standard prompts
+- **Type variants**: `IntVimPrompt`, `FloatVimPrompt` for typed input
+- **Seamless integration**: Works with Rich's validation, choices, and styling
 
 ## Installation
 
@@ -126,6 +133,28 @@ password_result = validated_rich_vim_input(
     panel_box_style="double",
     theme=purple_theme
 )
+```
+
+### VimPrompt (Rich Prompt API Integration)
+```python
+from vim_readline import VimPrompt, IntVimPrompt, ask_vim
+
+# Extends Rich's Prompt.ask() with vim editing!
+name = VimPrompt.ask_vim("Enter your name:")
+
+# Multiline code editor (Rich's Prompt can't do this!)
+code = VimPrompt.ask_vim(
+    "[bold cyan]Enter Python code:[/bold cyan]",
+    panel_title="Code Editor",
+    show_line_numbers=True,
+    placeholder_text="def main():\n    pass"
+)
+
+# Typed prompts with vim editing
+age = IntVimPrompt.ask_vim("Enter age:", default=25)
+
+# Convenience function (shorthand)
+bio = ask_vim("Enter bio:", panel_title="Biography")
 ```
 
 ## Validators
@@ -247,6 +276,9 @@ For complete keybindings, see `VIM_HELP.md`.
 Run the interactive examples:
 
 ```bash
+# Rich Prompt API integration demo (NEW!)
+python demos/rich_prompt_api_demo.py
+
 # ValidatedRichVimReadline demos (recommended)
 python demos/validated_rich_demo.py
 
@@ -264,6 +296,26 @@ python demos/vim_rich_box_style_editor.py
 ```
 
 ## Use Cases
+
+### Rich Prompt Integration (NEW!)
+```python
+from vim_readline import VimPrompt, IntVimPrompt
+from rich.console import Console
+
+console = Console()
+console.print("[bold]User Registration[/bold]\n")
+
+# Use VimPrompt like Rich's Prompt.ask()!
+name = VimPrompt.ask_vim("Name:", panel_title="Name")
+age = IntVimPrompt.ask_vim("Age:", panel_title="Age", default=18)
+bio = VimPrompt.ask_vim(
+    "Bio:",
+    panel_title="Biography",
+    show_line_numbers=True
+)
+
+console.print(f"\n[green]✓[/green] Registration complete!")
+```
 
 ### Form Input with Validation
 ```python
@@ -390,6 +442,43 @@ Theme configuration for ValidatedRichVimReadline.
 - `validation_message_valid` (str): Valid message color
 - `validation_message_invalid` (str): Invalid message color
 
+### `VimPrompt` (Rich Prompt API)
+Extends Rich's `Prompt.ask()` with vim modal editing.
+
+**Methods:**
+- `VimPrompt.ask_vim(prompt, *, console=None, password=False, choices=None, ...)` → `str`
+- `IntVimPrompt.ask_vim(...)` → `int`
+- `FloatVimPrompt.ask_vim(...)` → `float`
+
+**Parameters:**
+- All parameters from Rich's `Prompt.ask()` plus:
+- `panel_title` (str): Title for editor panel
+- `panel_box_style` (str): Box style (rounded/square/double/heavy)
+- `theme` (ValidatedRichTheme): Custom theme
+- `show_line_numbers` (bool): Display line numbers
+- `show_status` (bool): Show vim mode status
+- `placeholder_text` (str): Placeholder hint text
+
+**Convenience Functions:**
+- `ask_vim(prompt, ...)` → Shorthand for `VimPrompt.ask_vim()`
+- `ask_vim_int(prompt, ...)` → Shorthand for `IntVimPrompt.ask_vim()`
+- `ask_vim_float(prompt, ...)` → Shorthand for `FloatVimPrompt.ask_vim()`
+
+**Example:**
+```python
+from vim_readline import VimPrompt, ask_vim
+
+# Extends Rich's Prompt.ask()
+code = VimPrompt.ask_vim(
+    "Enter code:",
+    panel_title="Editor",
+    show_line_numbers=True
+)
+
+# Or use shorthand
+result = ask_vim("Enter text:")
+```
+
 ## Project Structure
 
 ```
@@ -443,6 +532,13 @@ vim_input_v02/
 - **Features**: Vim editing + validation + Rich styling + border colors
 - **Best for**: Professional UIs, form inputs, password entry, interactive applications
 
+### 4. VimPrompt (Rich Prompt API - NEW!)
+- **Location**: `vim_readline/rich_prompt.py`
+- **Style**: Extends Rich's `Prompt.ask()` API
+- **Usage**: `from vim_readline import VimPrompt, ask_vim`
+- **Features**: Vim editing + Rich's Prompt API + validation + multiline
+- **Best for**: Rich users wanting vim mode, familiar API, seamless integration with Rich apps
+
 ## Requirements
 
 - Python 3.7+
@@ -452,6 +548,7 @@ vim_input_v02/
 ## Documentation
 
 - **README.md** - This file (project overview and API)
+- **RICH_PROMPT_INTEGRATION.md** - Rich Prompt API integration guide (NEW!)
 - **CLAUDE.md** - Claude Code project instructions
 - **THEMING.md** - Theming system documentation
 - **VIM_HELP.md** - Complete vim keybindings reference
